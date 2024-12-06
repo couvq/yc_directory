@@ -4,7 +4,7 @@ import SearchFormReset from "./SearchFormReset";
 import { Search } from "lucide-react";
 
 type SearchFormProps = {
-  query: string;
+  query?: string;
 };
 
 const SearchForm = ({ query }: SearchFormProps) => {
