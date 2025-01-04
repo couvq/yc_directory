@@ -1,4 +1,6 @@
-import StartupCard from "@/components/StartupCard";
+import StartupCard, { StartupCardType } from "@/components/StartupCard";
+import { client } from "@/sanity/lib/client";
+import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import SearchForm from "../../components/SearchForm";
 
 type HomePageProps = {
@@ -7,23 +9,9 @@ type HomePageProps = {
 
 const Home = async ({ searchParams }: HomePageProps) => {
   const query = (await searchParams).query;
-  // todo - later this will come from sanity
-  const posts = [
-    {
-      _createdAt: new Date(),
-      views: 55,
-      author: {
-        _id: 1,
-        name: 'Quentin Couvelaire'
-      },
-      _id: 1,
-      description: "This is a description.",
-      image:
-        "https://images.unsplash.com/profile-1446404465118-3a53b909cc82?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=27a346c2362207494baa7b76f5d606e5",
-      category: "Robots",
-      title: "We robots",
-    },
-  ];
+
+  const posts = await client.fetch(STARTUPS_QUERY);
+
   return (
     <>
       <section className="pink_container">
